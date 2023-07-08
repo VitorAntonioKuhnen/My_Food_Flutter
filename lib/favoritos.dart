@@ -4,11 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_food/carrrinho.dart';
 import 'package:my_food/homepage.dart';
 
 class Favoritos extends StatefulWidget {
+  // final List<String> favoritos;
+  // Favoritos({Key? key, required this.favoritos}) : super(key: key);
   final List<String> favoritos;
-  Favoritos({Key? key, required this.favoritos}) : super(key: key);
+  final List<String> carrinho;
+  String nome;
+  Favoritos(
+      {Key? key,
+      required this.nome,
+      required this.carrinho,
+      required this.favoritos})
+      : super(key: key);
 
   @override
   State<Favoritos> createState() => _FavoritosState();
@@ -87,7 +97,14 @@ class _FavoritosState extends State<Favoritos> {
         currentIndex: IndexTelaInicial,
         onTap: (index) {
           if (index == 0) {
-            Navigator.pop(context);
+            // Navigator.pop(context);
+             Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => HomePage(favoritos: [], carrinho: [], nome: '',)));
+ 
+          }
+          else if (index == 2){
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Carrinho(favoritos: [], carrinho: [], nome: '',)));
           }
           setState(() {
             IndexTelaInicial = index;

@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_food/carrrinho.dart';
 import 'package:my_food/favoritos.dart';
+import 'package:my_food/listaProdutos.dart';
 
 class HomePage extends StatefulWidget {
+
   final List<String> favoritos;
   final List<String> carrinho;
   String nome;
@@ -16,12 +19,14 @@ class HomePage extends StatefulWidget {
       required this.carrinho,
       required this.favoritos})
       : super(key: key);
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   List<String> favoritos = [];
+  List<String> carrinho = [];
   int IndexTelaInicial = 0;
   @override
   Widget build(BuildContext context) {
@@ -88,6 +93,9 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   GestureDetector(
                     onTap: () {
+                       Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => ListaProdutos(favoritos: favoritos, carrinho: carrinho, nome: '',)));
+      
                       print('Hamburguer');
                     },
                     child: Container(
@@ -100,6 +108,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                   GestureDetector(
                     onTap: () {
+                      Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => ListaProdutos(favoritos: favoritos, carrinho: carrinho, nome: '',)));
+      
                       print('Café');
                     },
                     child: Container(
@@ -112,6 +123,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                   GestureDetector(
                     onTap: () {
+                      Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => ListaProdutos(favoritos: favoritos, carrinho: carrinho, nome: '',)));
+      
                       print('Pizza');
                     },
                     child: Container(
@@ -245,8 +259,12 @@ class _HomePageState extends State<HomePage> {
         currentIndex: IndexTelaInicial,
         onTap: (index) {
           if (index == 1) {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Favoritos(favoritos: favoritos,)));
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Favoritos(favoritos: favoritos, carrinho: carrinho, nome: '',)));
+          }
+          else if (index == 2){
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Carrinho(favoritos: favoritos, carrinho: carrinho, nome: '',)));
           }
           setState(() {
             IndexTelaInicial = index;
